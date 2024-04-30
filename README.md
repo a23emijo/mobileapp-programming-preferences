@@ -1,42 +1,65 @@
 
 # Rapport
 
-**Skriv din rapport här!**
-
-_Du kan ta bort all text som finns sedan tidigare_.
+Jag har gjort en applikation där man kan klicka på en knapp i Main Activity för att komma till
+Second Activity där man kan skriva text via en EditText. Man kan sedan spara den datan via en
+spara-knapp. Texten längst ner på Main Activity uppdateras då till det nya man har skrivit in.
 
 ## Följande grundsyn gäller dugga-svar:
 
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
-
+Koden nedan visar upp den nya texten som skrivits in och sparats i Second Activity när man
+går tillbaka till Main Activity.
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+@Override
+    protected void onResume() {
+        super.onResume();
+
+        TextView prefTextRef=new TextView(this);
+        prefTextRef=(TextView)findViewById(R.id.prefText);
+        prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
     }
-}
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+Koden nedan är XML för EditText-rutan i Second Activity som man skriver in den nya texten i.
+```
+<EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toTopOf="@id/prefButton"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:id="@+id/settingseditview"/>
+```
 
-![](android.png)
+Koden nedan är XML för spara-knappen som sparar det som står i EditText-rutan.
+```
+<Button
+      android:text="@string/save"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingseditview"
+      android:id="@+id/prefButton"
+      android:onClick="savePref"/>
+```
 
-Läs gärna:
+Koden nedan visar upp den nya texten som sparats från Second Activity.
+```
+<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goToSecondActivity"
+        android:id="@+id/prefText"/>
+```
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+I bilden nedan skrivs "Test" in i EditText-rutan som sedan sparas via "save"-knappen.
+![](Screenshot_Second_Activity.jpg)
+
+I bilden nedan visas "Test" upp som skrevs in i Second Activity.
+![](Screenshot_Main_Activity.jpg)
