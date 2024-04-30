@@ -40,10 +40,19 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainActivity"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/prefText"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/goToSecondActivityButton"
         android:id="@+id/goToSecondActivity"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goToSecondActivity"
+        android:id="@+id/prefText"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

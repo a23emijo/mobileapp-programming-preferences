@@ -3,4 +3,5 @@
     <string name="mainActivity">Main Activity</string>
     <string name="goToSecondActivityButton">Go to second activity</string>
     <string name="secondActivity">Second Activity</string>
+    <string name="save">Save</string>
 </resources>
